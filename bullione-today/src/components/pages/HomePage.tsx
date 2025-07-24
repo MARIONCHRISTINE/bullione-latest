@@ -18,11 +18,12 @@ const HomePage: React.FC = () => {
           loop
           playsInline
           preload="metadata"
-          style={{
-            filter: "none",
-            imageRendering: "crisp-edges",
-            WebkitImageRendering: "crisp-edges",
-          }}
+          style={
+            {
+              filter: "none",
+              imageRendering: "crisp-edges",
+            } as React.CSSProperties
+          }
         >
           <source src="/landing.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -118,6 +119,7 @@ const HomePage: React.FC = () => {
               <span className="text-blue-600 font-semibold">speaks for itself</span>
             </p>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center mb-8">
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-xl p-6 shadow-xl hover:shadow-2xl hover:from-gray-100 hover:to-gray-50 transition duration-300">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent mb-2">
@@ -172,6 +174,7 @@ const HomePage: React.FC = () => {
               profitable
             </p>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 */}
             <div className="group relative">
@@ -199,6 +202,7 @@ const HomePage: React.FC = () => {
                 </div>
               </div>
             </div>
+
             {/* Card 2 */}
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
@@ -225,6 +229,7 @@ const HomePage: React.FC = () => {
                 </div>
               </div>
             </div>
+
             {/* Card 3 */}
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
@@ -387,7 +392,6 @@ const HomePage: React.FC = () => {
           <div className="absolute bottom-10 left-10 w-72 h-72 bg-gradient-to-r from-cyan-300/6 to-blue-300/6 rounded-full blur-3xl"></div>
         </div>
         <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-gradient-to-r from-blue-400/5 to-cyan-400/5 rounded-full blur-3xl animate-pulse"></div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -397,6 +401,7 @@ const HomePage: React.FC = () => {
               Diversified portfolio across Africa's fastest-growing sectors
             </p>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Card 1 */}
             <div className="group relative">
@@ -533,7 +538,7 @@ const HomePage: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
               <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-white/20 transform rotate-1 group-hover:rotate-2 transition-transform duration-300">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-12 group-hover:rotate-6 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-12 group-hover:-rotate-6 transition-transform duration-300">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -640,7 +645,7 @@ const HomePage: React.FC = () => {
             </div>
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
               <div className="text-2xl md:text-4xl font-bold text-blue-500 mb-2">95%</div>
-              <div class="text-gray-300 text-sm md:text-base">Satisfaction Rate</div>
+              <div className="text-gray-300 text-sm md:text-base">Satisfaction Rate</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
               <div className="text-2xl md:text-4xl font-bold text-purple-500 mb-2">15+</div>
@@ -675,7 +680,6 @@ const HomePage: React.FC = () => {
               </p>
               <div className="text-blue-400 font-medium">Food Delivery Startup</div>
             </div>
-
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
               <div className="flex items-start space-x-3 mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
@@ -705,7 +709,6 @@ const HomePage: React.FC = () => {
               </p>
               <div className="text-green-400 font-medium">Sustainable Fashion</div>
             </div>
-
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
               <div className="flex items-start space-x-3 mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">

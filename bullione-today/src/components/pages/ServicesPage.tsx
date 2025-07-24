@@ -32,7 +32,6 @@ const ServicesPage: React.FC = () => {
     try {
       const response = await fetch("http://localhost/BULLIONE-LATEST/bullione-backend/api/get-services.php")
       const data = await response.json()
-
       if (Array.isArray(data)) {
         const parsedServices = data.map((service) => ({
           ...service,
@@ -192,7 +191,6 @@ const ServicesPage: React.FC = () => {
     }
   }
 
-
   // Static service data based on your requirements
   const staticServices = {
     investment: [
@@ -334,16 +332,16 @@ const ServicesPage: React.FC = () => {
           loop
           playsInline
           preload="metadata"
-          style={{
-            filter: "none",
-            imageRendering: "crisp-edges",
-            WebkitImageRendering: "crisp-edges",
-          }}
+          style={
+            {
+              filter: "none",
+              imageRendering: "crisp-edges",
+            } as React.CSSProperties
+          }
         >
           <source src="/services.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-black/70 via-black/50 to-black/60 z-10">
           <div
             className="absolute top-0 left-0 w-full h-full opacity-20 mix-blend-overlay z-1"
@@ -362,7 +360,6 @@ const ServicesPage: React.FC = () => {
             }}
           ></div>
         </div>
-
         <div className="relative z-20 text-center text-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
@@ -480,7 +477,6 @@ const ServicesPage: React.FC = () => {
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-amber-500/5 to-orange-500/5 rounded-full blur-3xl"></div>
         </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -617,19 +613,21 @@ const ServicesPage: React.FC = () => {
                 <div className="mb-6">
                   <h4 className="font-semibold text-white mb-3">Key Features:</h4>
                   <ul className="space-y-1">
-                    {service.features.slice(0, 3).map((feature: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined, featureIndex: React.Key | null | undefined) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-gray-300">
-                        <svg
-                          className="w-3 h-3 text-green-400 mr-2 flex-shrink-0"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
+                    {Array.isArray(service.features)
+                      ? service.features.slice(0, 3).map((feature: string, featureIndex: number) => (
+                          <li key={featureIndex} className="flex items-center text-sm text-gray-300">
+                            <svg
+                              className="w-3 h-3 text-green-400 mr-2 flex-shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            {feature}
+                          </li>
+                        ))
+                      : null}
                   </ul>
                 </div>
 
@@ -717,7 +715,6 @@ const ServicesPage: React.FC = () => {
               Bullione de-risks your investment by handling all local complexities
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
@@ -761,7 +758,6 @@ const ServicesPage: React.FC = () => {
           <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-r from-orange-500/10 to-yellow-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
         </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {activeTab === "investment" ? "Ready to Invest in Africa's Future?" : "Ready to Make a Lasting Impact?"}
