@@ -66,7 +66,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setLoading(false)
   }, [])
 
-  const login = async (email: string, password: string): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const login = async (email: string): Promise<void> => {
     setLoading(true)
     try {
       // Simulate API call
@@ -85,9 +86,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const register = async (
     email: string,
-    password: string,
+    _password: string,
     name: string,
     type: "investor" | "applicant",
   ): Promise<void> => {

@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useAuth } from "../../../contexts/AuthContext"
 
 const InvestorPortfolio: React.FC = () => {
-  const { user } = useAuth()
+  useAuth()
   const [selectedPeriod, setSelectedPeriod] = useState("1Y")
   const [selectedView, setSelectedView] = useState("overview")
 
@@ -277,7 +277,7 @@ const InvestorPortfolio: React.FC = () => {
             </div>
           </div>
           <div className="h-64 flex items-end justify-between space-x-2">
-            {performanceData.map((data, index) => (
+            {performanceData.map((data) => (
               <div key={data.month} className="flex-1 flex flex-col items-center">
                 <div
                   className="w-full bg-blue-600 rounded-t-sm"

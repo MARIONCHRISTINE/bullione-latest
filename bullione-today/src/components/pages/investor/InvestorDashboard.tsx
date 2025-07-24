@@ -7,7 +7,7 @@ import { useAuth } from "../../../contexts/AuthContext"
 
 const InvestorDashboard: React.FC = () => {
   const { user } = useAuth()
-  const [timeframe, setTimeframe] = useState("1M")
+  const [] = useState("1M")
 
   // Mock data - in real app, this would come from API
   const portfolioData = {

@@ -10,6 +10,7 @@ import HomePage from "./components/pages/HomePage"
 import AboutPage from "./components/pages/AboutPage"
 import ServicesPage from "./components/pages/ServicesPage"
 import ContactPage from "./components/pages/ContactPage"
+import DonatePage from "./components/pages/DonatePage"
 import LoginPage from "./components/pages/LoginPage"
 import RegisterPage from "./components/pages/RegisterPage"
 import TermsPage from "./components/pages/TermsPage"
@@ -48,6 +49,7 @@ const App: React.FC = () => {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/donate" element={<DonatePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/terms" element={<TermsPage />} />

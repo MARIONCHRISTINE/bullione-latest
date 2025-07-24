@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useAuth } from "../../../contexts/AuthContext"
 
 const InvestorProfile: React.FC = () => {
-  const { user } = useAuth()
+  useAuth()
   const [activeTab, setActiveTab] = useState("profile")
   const [isEditing, setIsEditing] = useState(false)
 
@@ -38,7 +38,7 @@ const InvestorProfile: React.FC = () => {
     portfolioAlerts: true,
   })
 
-  const [documents, setDocuments] = useState([
+  const [documents] = useState([
     {
       id: 1,
       name: "Passport Copy",

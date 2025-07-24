@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useAuth } from "../../../contexts/AuthContext"
 
 const ApplicantApplication: React.FC = () => {
-  const { user } = useAuth()
+  useAuth()
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({
     // Company Information

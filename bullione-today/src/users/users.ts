@@ -4,42 +4,25 @@ export interface User {
   name: string
   type: "investor" | "applicant"
   avatar?: string
-  profile?: {
+  createdAt: string
+  profile: {
     company?: string
     location?: string
     bio?: string
     investmentFocus?: string[]
-    totalInvestments?: number
-    portfolioValue?: number
-    riskTolerance?: "low" | "medium" | "high"
-    preferredSectors?: string[]
+    fundingStage?: string
+    industry?: string
+    website?: string
+    linkedIn?: string
+    twitter?: string
   }
-  createdAt: string
-  lastLogin?: string
-  isVerified: boolean
-  status: "active" | "pending" | "suspended"
 }
 
 export interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
   loading: boolean
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
-  register: (userData: RegisterData) => Promise<{ success: boolean; error?: string }>
+  login: (email: string, password: string) => Promise<void>
+  register: (email: string, password: string, name: string, type: "investor" | "applicant") => Promise<void>
   logout: () => void
-  updateProfile: (updates: Partial<User>) => Promise<void>
-}
-
-export interface RegisterData {
-  email: string
-  password: string
-  name: string
-  type: "investor" | "applicant"
-  company?: string
-  location?: string
-}
-
-export interface LoginCredentials {
-  email: string
-  password: string
 }

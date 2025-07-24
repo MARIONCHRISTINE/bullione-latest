@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
     setIsLoading(true)
 
     try {
-      await login(email, password, "investor")
+      await login(email, password)
       navigate("/investor/dashboard")
     } catch (err) {
       setError("Invalid email or password")

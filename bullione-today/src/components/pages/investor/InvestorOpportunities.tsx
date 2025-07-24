@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useAuth } from "../../../contexts/AuthContext"
 
 const InvestorOpportunities: React.FC = () => {
-  const { user } = useAuth()
+  useAuth()
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [sortBy, setSortBy] = useState("newest")
 
