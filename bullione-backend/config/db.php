@@ -1,18 +1,15 @@
 <?php
-$host = "localhost";
-$dbname = "bullione_db";
-$username = "root";
-$password = "";
+$host = 'localhost';
+$dbname = 'db_bullione';
+$username = 'root';
+$password = '';
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    // Set the PDO error mode to exception
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Optional: set charset to UTF-8
-    $conn->exec("SET NAMES 'utf8'");
-    // echo "Connected successfully"; // You can uncomment this for testing
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(["error" => "Database connection failed: " . $e->getMessage()]);
     exit;
 }
 ?>
