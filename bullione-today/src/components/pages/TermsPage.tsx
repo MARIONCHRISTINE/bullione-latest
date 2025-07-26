@@ -1,303 +1,298 @@
 "use client"
-
 import type React from "react"
+import { Link } from "react-router-dom"
+import { useAuth } from "../../contexts/AuthContext"
 
 const TermsPage: React.FC = () => {
+  useAuth()
+
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms and Conditions</h1>
-          <p className="text-lg text-gray-600">Last updated: January 2024</p>
-        </div>
+    <div
+      className="bg-white min-h-screen relative"
+      style={{
+        backgroundImage: "url('/terms.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      {/* Background Overlay - Matching HomePage */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/60">
+        <div
+          className="absolute top-0 left-0 w-full h-full opacity-20 mix-blend-overlay"
+          style={{
+            background: `
+              radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%)
+            `,
+          }}
+        ></div>
+        <div
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+            background: `radial-gradient(ellipse at center, transparent 0%, transparent 70%, rgba(0, 0, 0, 0.2) 100%)`,
+          }}
+        ></div>
+      </div>
 
-        <div className="prose prose-lg max-w-none">
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Introduction</h2>
-            <p className="text-gray-700 mb-4">
-              Welcome to Bullione ("we," "our," or "us"). These Terms and Conditions ("Terms") govern your use of our
-              investment platform and services. By accessing or using our platform, you agree to be bound by these
-              Terms.
+      {/* Hero Section - Transparent to show background */}
+      <section className="py-16 md:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center text-white">
+            <h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              style={{
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              Terms and <span className="text-yellow-400">Conditions</span>
+            </h1>
+            <p
+              className="text-lg md:text-xl lg:text-2xl mb-8 max-w-3xl mx-auto"
+              style={{
+                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.4)",
+              }}
+            >
+              Please read these terms and conditions carefully before using our platform
             </p>
-            <p className="text-gray-700">
-              Bullione is a financial technology platform that connects investors with investment opportunities across
-              Africa. We facilitate investment transactions but do not provide investment advice.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Definitions</h2>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>
-                <strong>"Platform"</strong> refers to the Bullione website, mobile application, and related services
-              </li>
-              <li>
-                <strong>"User"</strong> refers to any individual or entity using our Platform
-              </li>
-              <li>
-                <strong>"Investor"</strong> refers to users seeking investment opportunities
-              </li>
-              <li>
-                <strong>"Applicant"</strong> refers to users seeking funding for their ventures
-              </li>
-              <li>
-                <strong>"Investment Opportunity"</strong> refers to funding requests listed on our Platform
-              </li>
-            </ul>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Eligibility and Account Registration</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">3.1 Eligibility Requirements</h3>
-            <p className="text-gray-700 mb-4">To use our Platform, you must:</p>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Be at least 18 years old</li>
-              <li>Have the legal capacity to enter into binding agreements</li>
-              <li>Not be prohibited from using our services under applicable laws</li>
-              <li>Provide accurate and complete information during registration</li>
-            </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">3.2 Account Security</h3>
-            <p className="text-gray-700">
-              You are responsible for maintaining the confidentiality of your account credentials and for all activities
-              that occur under your account. You must notify us immediately of any unauthorized use.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Platform Services</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">4.1 For Investors</h3>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Access to vetted investment opportunities</li>
-              <li>Due diligence reports and documentation</li>
-              <li>Portfolio management tools</li>
-              <li>Investment tracking and reporting</li>
-            </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">4.2 For Applicants</h3>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2">
-              <li>Application submission and management</li>
-              <li>Access to investor network</li>
-              <li>Funding process facilitation</li>
-              <li>Business development support</li>
-            </ul>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Investment Risks and Disclaimers</h2>
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-              <p className="text-yellow-800 font-semibold">Important Risk Warning</p>
-              <p className="text-yellow-700">
-                All investments carry risk. Past performance does not guarantee future results. You may lose some or all
-                of your invested capital.
-              </p>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">5.1 Investment Risks</h3>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Market volatility and economic conditions</li>
-              <li>Currency exchange rate fluctuations</li>
-              <li>Political and regulatory changes</li>
-              <li>Company-specific risks and business failures</li>
-              <li>Liquidity constraints</li>
-            </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">5.2 No Investment Advice</h3>
-            <p className="text-gray-700">
-              Bullione does not provide investment advice. All information on our Platform is for informational purposes
-              only. You should consult with qualified financial advisors before making investment decisions.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Fees and Charges</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">6.1 Platform Fees</h3>
-            <p className="text-gray-700 mb-4">Our fee structure includes:</p>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Transaction fees for successful investments</li>
-              <li>Platform maintenance fees</li>
-              <li>Due diligence and verification fees</li>
-              <li>Payment processing fees</li>
-            </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">6.2 Fee Changes</h3>
-            <p className="text-gray-700">
-              We reserve the right to modify our fee structure with 30 days' notice to users. Continued use of the
-              Platform constitutes acceptance of new fees.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">7. User Responsibilities and Conduct</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">7.1 Prohibited Activities</h3>
-            <p className="text-gray-700 mb-4">Users must not:</p>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Provide false or misleading information</li>
-              <li>Engage in fraudulent or illegal activities</li>
-              <li>Manipulate or attempt to manipulate investment processes</li>
-              <li>Violate intellectual property rights</li>
-              <li>Interfere with Platform operations</li>
-            </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">7.2 Compliance Requirements</h3>
-            <p className="text-gray-700">
-              Users must comply with all applicable laws and regulations, including anti-money laundering (AML) and
-              know-your-customer (KYC) requirements.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Due Diligence and Verification</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">8.1 Our Due Diligence Process</h3>
-            <p className="text-gray-700 mb-4">
-              We conduct reasonable due diligence on investment opportunities, including:
-            </p>
-            <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
-              <li>Financial statement review</li>
-              <li>Management team assessment</li>
-              <li>Market analysis</li>
-              <li>Legal and regulatory compliance checks</li>
-            </ul>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">8.2 Limitations</h3>
-            <p className="text-gray-700">
-              While we strive for accuracy, our due diligence does not guarantee investment success or eliminate all
-              risks. Investors should conduct their own additional research.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">9. Privacy and Data Protection</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">9.1 Data Collection</h3>
-            <p className="text-gray-700 mb-4">
-              We collect and process personal data in accordance with our Privacy Policy and applicable data protection
-              laws, including GDPR where applicable.
-            </p>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">9.2 Data Security</h3>
-            <p className="text-gray-700">
-              We implement appropriate technical and organizational measures to protect your personal data against
-              unauthorized access, alteration, disclosure, or destruction.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Intellectual Property</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">10.1 Platform Content</h3>
-            <p className="text-gray-700 mb-4">
-              All content on our Platform, including text, graphics, logos, and software, is owned by Bullione or our
-              licensors and is protected by intellectual property laws.
-            </p>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">10.2 User Content</h3>
-            <p className="text-gray-700">
-              By submitting content to our Platform, you grant us a non-exclusive, worldwide, royalty-free license to
-              use, modify, and display such content for Platform operations.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">11. Limitation of Liability</h2>
-            <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
-              <p className="text-red-800 font-semibold">Important Legal Notice</p>
-              <p className="text-red-700">
-                Our liability is limited as described below. Please read this section carefully.
-              </p>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">11.1 Disclaimer of Warranties</h3>
-            <p className="text-gray-700 mb-4">
-              Our Platform is provided "as is" without warranties of any kind, either express or implied, including but
-              not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.
-            </p>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">11.2 Limitation of Damages</h3>
-            <p className="text-gray-700">
-              To the maximum extent permitted by law, Bullione shall not be liable for any indirect, incidental,
-              special, consequential, or punitive damages, including but not limited to loss of profits, data, or
-              business opportunities.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">12. Indemnification</h2>
-            <p className="text-gray-700">
-              You agree to indemnify, defend, and hold harmless Bullione, its officers, directors, employees, and agents
-              from and against any claims, liabilities, damages, losses, and expenses arising out of or in any way
-              connected with your use of our Platform or violation of these Terms.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">13. Termination</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">13.1 Termination by You</h3>
-            <p className="text-gray-700 mb-4">
-              You may terminate your account at any time by contacting our support team. Termination does not affect
-              existing investment commitments.
-            </p>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">13.2 Termination by Us</h3>
-            <p className="text-gray-700">
-              We may suspend or terminate your account immediately if you violate these Terms or engage in prohibited
-              activities. We may also terminate accounts with reasonable notice for business reasons.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">14. Dispute Resolution</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">14.1 Governing Law</h3>
-            <p className="text-gray-700 mb-4">
-              These Terms are governed by the laws of Nigeria, without regard to conflict of law principles.
-            </p>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">14.2 Arbitration</h3>
-            <p className="text-gray-700">
-              Any disputes arising from these Terms or your use of our Platform shall be resolved through binding
-              arbitration in Lagos, Nigeria, in accordance with the Arbitration and Conciliation Act.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">15. Regulatory Compliance</h2>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">15.1 Securities Regulations</h3>
-            <p className="text-gray-700 mb-4">
-              Investment opportunities on our Platform may be subject to securities regulations in various
-              jurisdictions. Users are responsible for ensuring compliance with applicable securities laws.
-            </p>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">15.2 Tax Obligations</h3>
-            <p className="text-gray-700">
-              Users are solely responsible for determining and fulfilling their tax obligations related to investments
-              made through our Platform. We recommend consulting with tax professionals.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">16. Changes to Terms</h2>
-            <p className="text-gray-700 mb-4">
-              We may modify these Terms at any time by posting updated Terms on our Platform. Material changes will be
-              communicated to users via email or Platform notifications at least 30 days before taking effect.
-            </p>
-            <p className="text-gray-700">
-              Continued use of our Platform after changes take effect constitutes acceptance of the modified Terms.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">17. Contact Information</h2>
-            <p className="text-gray-700 mb-4">
-              If you have questions about these Terms or our services, please contact us:
-            </p>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700">
-                <strong>Email:</strong> legal@bullione.com
-              </p>
-              <p className="text-gray-700">
-                <strong>Phone:</strong> +234 (0) 123 456 7890
-              </p>
-              <p className="text-gray-700">
-                <strong>Address:</strong> Bullione Limited, Lagos, Nigeria
-              </p>
-              <p className="text-gray-700">
-                <strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM WAT
-              </p>
-            </div>
-          </section>
-
-          <div className="border-t border-gray-200 pt-8 mt-12">
-            <p className="text-sm text-gray-500 text-center">
-              By using the Bullione Platform, you acknowledge that you have read, understood, and agree to be bound by
-              these Terms and Conditions.
+            <p
+              className="text-lg mb-8"
+              style={{
+                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.4)",
+              }}
+            >
+              Last Updated: January 2024
             </p>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Terms Content - White section */}
+      <section className="py-16 md:py-20 bg-white relative overflow-hidden shadow-2xl">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-lg max-w-none">
+            {/* Introduction */}
+            <div className="mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                <span className="text-blue-600">Introduction</span>
+              </h2>
+              <div className="group relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
+                <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-white/20 transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300">
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    Welcome to Bullione ("we", "us", or "our"). These Terms and Conditions ("Terms") govern your access
+                    to and use of Bullione's investment platform, website, mobile application, and related services
+                    (collectively referred to as the "Platform"). By accessing or using the Platform, you agree to
+                    comply with and be bound by these Terms. If you do not agree, you may not use the Platform.
+                  </p>
+                  <p className="text-gray-700 leading-relaxed">
+                    Bullione is a financial technology platform that connects global investors with high-growth
+                    investment opportunities across Africa. We facilitate investment transactions but do not provide
+                    investment advice or manage investments on behalf of users.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Platform Services */}
+            <div className="mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                <span className="text-blue-600">Platform</span>{" "}
+                <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                  Services
+                </span>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Card 1 */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
+                  <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-white/20 transform rotate-1 group-hover:rotate-2 transition-transform duration-300">
+                    <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform -rotate-12 group-hover:-rotate-6 transition-transform duration-300">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 text-center">For Investors</h3>
+                    <ul className="list-disc list-inside text-gray-700 space-y-2">
+                      <li>Access to curated and vetted investment opportunities</li>
+                      <li>Due diligence documentation and data rooms</li>
+                      <li>Portfolio monitoring and performance tracking tools</li>
+                      <li>Access to insights and periodic reports</li>
+                    </ul>
+                  </div>
+                </div>
+                {/* Card 2 */}
+                <div className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
+                  <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-8 border border-white/20 transform -rotate-1 group-hover:-rotate-2 transition-transform duration-300">
+                    <div className="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-12 group-hover:rotate-6 transition-transform duration-300">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 text-center">For Applicants</h3>
+                    <ul className="list-disc list-inside text-gray-700 space-y-2">
+                      <li>Online submission and tracking of funding applications</li>
+                      <li>Access to Bullione's investor network</li>
+                      <li>Investment facilitation and deal structuring</li>
+                      <li>Advisory support for business development</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Dark Theme Section - Matching HomePage donation impact */}
+      <section className="py-12 md:py-16 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-600 relative overflow-hidden shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-black/50"></div>
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-r from-orange-500/10 to-yellow-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-amber-500/5 to-orange-500/5 rounded-full blur-3xl"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Legal Compliance Impact</h2>
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+              Our commitment to legal excellence and regulatory compliance across all African markets we serve.
+            </p>
+          </div>
+          {/* Legal Statistics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center mb-8 md:mb-10">
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
+              <div className="text-2xl md:text-4xl font-bold text-yellow-500 mb-2">15+</div>
+              <div className="text-gray-300 text-sm md:text-base">Countries Compliant</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
+              <div className="text-2xl md:text-4xl font-bold text-orange-500 mb-2">100%</div>
+              <div className="text-gray-300 text-sm md:text-base">KYC/AML Compliant</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
+              <div className="text-2xl md:text-4xl font-bold text-yellow-500 mb-2">24/7</div>
+              <div className="text-gray-300 text-sm md:text-base">Legal Support</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
+              <div className="text-2xl md:text-4xl font-bold text-orange-500 mb-2">0</div>
+              <div className="text-gray-300 text-sm md:text-base">Legal Violations</div>
+            </div>
+          </div>
+          {/* Legal Features */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-10">
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
+              <div className="w-12 h-12 bg-green-500/20 border border-green-500/30 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-white">Regulatory Compliance</h3>
+              <p className="text-gray-300 mb-4">
+                Full compliance with securities laws, financial regulations, and investment guidelines across all
+                jurisdictions.
+              </p>
+              <div className="text-yellow-400 font-medium">Multi-jurisdiction expertise</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
+              <div className="w-12 h-12 bg-purple-500/20 border border-purple-500/30 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-white">Legal Documentation</h3>
+              <p className="text-gray-300 mb-4">
+                Comprehensive legal frameworks, contracts, and documentation ensuring all parties are protected.
+              </p>
+              <div className="text-orange-400 font-medium">Bulletproof agreements</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-xl hover:bg-white/15 transition duration-300">
+              <div className="w-12 h-12 bg-emerald-500/20 border border-emerald-500/30 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-white">Dispute Resolution</h3>
+              <p className="text-gray-300 mb-4">
+                Established arbitration processes and legal mechanisms for fair and efficient dispute resolution.
+              </p>
+              <div className="text-yellow-400 font-medium">Fair & transparent</div>
+            </div>
+          </div>
+          {/* CTA */}
+          <div className="text-center">
+            <Link
+              to="/contact"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:from-yellow-400 hover:to-orange-400 transition duration-300 inline-flex items-center shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
+              Legal Consultation
+            </Link>
+            <p className="text-gray-400 mt-4">Get expert legal guidance for your investment journey</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Final White Section */}
+      <section className="py-16 md:py-20 bg-white relative overflow-hidden shadow-2xl">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Contact Section - Matching HomePage CTA style */}
+          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-6 md:px-8 py-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+            <h3 className="text-2xl font-bold mb-4">Questions About Our Terms?</h3>
+            <p className="mb-6">
+              If you have any questions about these Terms and Conditions, please don't hesitate to contact us.
+            </p>
+            <Link
+              to="/contact"
+              className="bg-white text-orange-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition duration-300 inline-flex items-center shadow-lg"
+            >
+              <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

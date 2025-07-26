@@ -1,7 +1,9 @@
 export interface User {
   id: string
   email: string
-  name: string
+  first_name: string // Added for new user details
+  last_name: string // Added for new user details
+  name: string // Kept for backward compatibility
   type: "investor" | "applicant"
   avatar?: string
   createdAt: string

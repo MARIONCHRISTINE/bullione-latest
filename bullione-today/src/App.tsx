@@ -13,7 +13,12 @@ import ContactPage from "./components/pages/ContactPage"
 import DonatePage from "./components/pages/DonatePage"
 import LoginPage from "./components/pages/LoginPage"
 import RegisterPage from "./components/pages/RegisterPage"
+import ResetPasswordPage from "./components/pages/ResetPasswordPage"
 import TermsPage from "./components/pages/TermsPage"
+
+// ADD THESE TWO MISSING IMPORTS - Note the correct component names
+import PrivacyPolicy from "./components/pages/PrivacyPolicy"
+import CookiesPolicy from "./components/pages/CookiesPolicy"
 
 // Service Pages
 import StartupInvestmentsPage from "./components/pages/services/StartupInvestmentsPage"
@@ -28,8 +33,8 @@ import TradeableCompaniesPage from "./components/pages/services/TradeableCompani
 
 // Investor Pages
 import InvestorDashboard from "./components/pages/investor/InvestorDashboard"
-import InvestorOpportunities from "./components/pages/investor/InvestorOpportunities"
-import InvestorPortfolio from "./components/pages/investor/InvestorPortfolio"
+import InvestorOpportunities from "./components/pages/investor/InvestorPortfolio"
+import InvestorPortfolio from "./components/pages/investor/InvestorPortfolio" // Corrected import
 import InvestorProfile from "./components/pages/investor/InvestorProfile"
 
 // Applicant Pages
@@ -50,9 +55,15 @@ const App: React.FC = () => {
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/donate" element={<DonatePage />} />
+              <Route path="/donate-now" element={<DonatePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route path="/terms" element={<TermsPage />} />
+
+              {/* ADD THESE TWO MISSING ROUTES - Using correct component names */}
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/cookies-policy" element={<CookiesPolicy />} />
 
               {/* Service Routes */}
               <Route path="/services/startup-investments" element={<StartupInvestmentsPage />} />

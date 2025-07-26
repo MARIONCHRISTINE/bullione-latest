@@ -4,18 +4,35 @@ import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 interface Service {
-  id: string
+  id: number
   title: string
   description: string
   icon: string
   link: string
-  features: string
-  minInvestment: string
-  expectedReturn: string
+  features: string[]
+  minInvestment: number
+  expectedReturn: number
   riskLevel: string
   category: string
   sector: string
   type: "investment" | "donation"
+  created_at: string
+  updated_at: string
+}
+
+interface ApiResponse {
+  success: boolean
+  data: Service[]
+  total: number
+  count: number
+  filters: {
+    category: string | null
+    sector: string | null
+    type: string | null
+    limit: number | null
+    offset: number
+  }
+  error?: string
 }
 
 const ServicesPage: React.FC = () => {
@@ -26,26 +43,40 @@ const ServicesPage: React.FC = () => {
 
   useEffect(() => {
     fetchServices()
-  }, [])
+  }, [activeTab])
 
   const fetchServices = async () => {
+    setLoading(true)
+    setError(null)
+
     try {
-      const response = await fetch("http://localhost/BULLIONE-LATEST/bullione-backend/api/get-services.php")
-      const data = await response.json()
-      if (Array.isArray(data)) {
-        const parsedServices = data.map((service) => ({
-          ...service,
-          features: typeof service.features === "string" ? JSON.parse(service.features) : service.features,
-        }))
-        setServices(parsedServices)
-      } else if (data.error) {
-        setError(data.error)
-      } else {
-        setError("Failed to fetch services")
+      const apiUrl = `http://localhost/bullione-latest/bullione-backend/api/get-services.php?type=${activeTab}`
+      console.log("Fetching services from:", apiUrl)
+
+      const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      console.log("Response status:", response.status)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
-    } catch (err) {
-      setError("Error connecting to server")
+
+      const result: ApiResponse = await response.json()
+      console.log("API Response:", result)
+
+      if (result.success) {
+        setServices(result.data || [])
+      } else {
+        setError(result.error || "Failed to fetch services")
+      }
+    } catch (err: any) {
       console.error("Error fetching services:", err)
+      setError(`Network error: ${err.message}. Please check if the server is running.`)
     } finally {
       setLoading(false)
     }
@@ -191,17 +222,30 @@ const ServicesPage: React.FC = () => {
     }
   }
 
-  // Static service data based on your requirements
+  const formatCurrency = (amount: number) => {
+    if (amount >= 1000000) {
+      return `$${(amount / 1000000).toFixed(0)}M+`
+    } else if (amount >= 1000) {
+      return `$${(amount / 1000).toFixed(0)}K+`
+    }
+    return `$${amount.toLocaleString()}`
+  }
+
+  const formatPercentage = (rate: number) => {
+    return `${rate}%`
+  }
+
+  // Static fallback data for when no services are available from backend
   const staticServices = {
     investment: [
       {
-        id: "1",
+        id: 1,
         title: "Affordable Housing & Smart Cities",
         description:
           "Public housing PPPs in Nairobi, Kigali, Accra, and Luanda. Smart city projects with digital infrastructure, utilities, and green spaces",
         icon: "housing",
-        minInvestment: "$25M+",
-        expectedReturn: "10-15%",
+        minInvestment: 25000000,
+        expectedReturn: 12.5,
         riskLevel: "Low",
         features: [
           "Public housing PPPs",
@@ -210,27 +254,37 @@ const ServicesPage: React.FC = () => {
           "Green spaces integration",
         ],
         link: "/invest/housing",
+        category: "Infrastructure",
+        sector: "Housing",
+        type: "investment" as const,
+        created_at: "",
+        updated_at: "",
       },
       {
-        id: "2",
+        id: 2,
         title: "Agricultural & Industrial Parks",
         description:
           "Agro-processing zones, grain storage facilities. Industrial estates and special economic zones (SEZs)",
         icon: "agriculture",
-        minInvestment: "$35M+",
-        expectedReturn: "11-16%",
+        minInvestment: 35000000,
+        expectedReturn: 13.5,
         riskLevel: "Medium",
         features: ["Agro-processing zones", "Grain storage facilities", "Industrial estates", "Special economic zones"],
         link: "/invest/agriculture",
+        category: "Agriculture",
+        sector: "Industrial",
+        type: "investment" as const,
+        created_at: "",
+        updated_at: "",
       },
       {
-        id: "3",
+        id: 3,
         title: "Energy & Utilities",
         description:
           "Off-grid solar, hydropower stations, national grid expansion. Power transmission and distribution upgrades",
         icon: "energy",
-        minInvestment: "$40M+",
-        expectedReturn: "15-22%",
+        minInvestment: 40000000,
+        expectedReturn: 18.5,
         riskLevel: "Medium",
         features: [
           "Off-grid solar projects",
@@ -239,83 +293,63 @@ const ServicesPage: React.FC = () => {
           "Power transmission upgrades",
         ],
         link: "/invest/energy",
-      },
-      {
-        id: "4",
-        title: "Healthcare & Education",
-        description:
-          "Build-to-operate models for hospitals, clinics, and e-learning infrastructure. Government-leased schools, universities, and training centers",
-        icon: "healthcare",
-        minInvestment: "$20M+",
-        expectedReturn: "9-14%",
-        riskLevel: "Medium",
-        features: [
-          "Hospital construction",
-          "E-learning infrastructure",
-          "Government-leased facilities",
-          "Training centers",
-        ],
-        link: "/invest/healthcare",
-      },
-      {
-        id: "5",
-        title: "Transportation Infrastructure",
-        description:
-          "Road construction, toll roads, expressways, airport and seaport upgrades (e.g., Mombasa, Lagos, Dar es Salaam), inland container depots and railway logistics hubs",
-        icon: "transportation",
-        minInvestment: "$50M+",
-        expectedReturn: "12-18%",
-        riskLevel: "Medium",
-        features: [
-          "Road construction and toll roads",
-          "Airport and seaport upgrades",
-          "Railway logistics hubs",
-          "Inland container depots",
-        ],
-        link: "/invest/transportation",
-      },
-      {
-        id: "6",
-        title: "Water & Sanitation Projects",
-        description:
-          "Dams, desalination plants, and clean water infrastructure. Urban and rural sewage and waste management systems",
-        icon: "water",
-        minInvestment: "$30M+",
-        expectedReturn: "8-12%",
-        riskLevel: "Low",
-        features: [
-          "Dam construction",
-          "Desalination plants",
-          "Clean water infrastructure",
-          "Sewage management systems",
-        ],
-        link: "/invest/water",
+        category: "Energy",
+        sector: "Utilities",
+        type: "investment" as const,
+        created_at: "",
+        updated_at: "",
       },
     ],
-    donation: services.filter((service) => service.type === "donation"),
+    donation: [
+      {
+        id: 4,
+        title: "Education for All",
+        description: "Supporting quality education access across rural and urban communities in Africa",
+        icon: "education",
+        minInvestment: 0,
+        expectedReturn: 0,
+        riskLevel: "Low",
+        features: ["School construction", "Teacher training programs", "Educational materials", "Scholarship programs"],
+        link: "/donate/education",
+        category: "Social Impact",
+        sector: "Education",
+        type: "donation" as const,
+        created_at: "",
+        updated_at: "",
+      },
+    ],
   }
 
-  const displayServices = activeTab === "investment" ? staticServices.investment : staticServices.donation
+  // Use backend data if available, otherwise fall back to static data
+  const displayServices = services.length > 0 ? services : staticServices[activeTab]
 
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Loading services...</p>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 text-lg">Loading services...</p>
         </div>
       </div>
     )
   }
 
-  if (error) {
+  if (error && services.length === 0) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600 text-xl">{error}</p>
-          <button onClick={fetchServices} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="text-red-500 text-6xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Connection Error</h2>
+          <p className="text-red-600 text-lg mb-6">{error}</p>
+          <button
+            onClick={fetchServices}
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"
+          >
             Try Again
           </button>
+          <p className="text-gray-500 text-sm mt-4">
+            Don't worry, we'll show you some sample services below if the connection fails.
+          </p>
         </div>
       </div>
     )
@@ -323,7 +357,7 @@ const ServicesPage: React.FC = () => {
 
   return (
     <div className="bg-white">
-      {/* Hero Section with Video Background - RESTORED */}
+      {/* Hero Section with Video Background */}
       <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
@@ -347,10 +381,10 @@ const ServicesPage: React.FC = () => {
             className="absolute top-0 left-0 w-full h-full opacity-20 mix-blend-overlay z-1"
             style={{
               background: `
-                   radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
-                   radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-                   radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%)
-                 `,
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%)
+              `,
             }}
           ></div>
           <div
@@ -417,9 +451,21 @@ const ServicesPage: React.FC = () => {
                 ? "We facilitate investor entry into large-scale national and regional infrastructure and development programs"
                 : "Transform lives and communities through strategic philanthropic investments in Africa's most critical sectors"}
             </p>
+
+            {/* Show connection status */}
+            {error && services.length === 0 && (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 max-w-2xl mx-auto mb-6">
+                <p className="text-yellow-800 text-sm">
+                  <span className="font-semibold">Note:</span> Showing sample services.
+                  <button onClick={fetchServices} className="ml-2 text-yellow-600 hover:text-yellow-800 underline">
+                    Try connecting to live data
+                  </button>
+                </p>
+              </div>
+            )}
           </div>
 
-          {/* Tab Navigation - Side by Side */}
+          {/* Tab Navigation */}
           <div className="flex justify-center mb-12">
             <div className="flex gap-4">
               <button
@@ -486,6 +532,13 @@ const ServicesPage: React.FC = () => {
               {activeTab === "investment"
                 ? "We facilitate investor entry into large-scale national and regional infrastructure and development programs"
                 : "Beyond investments, we believe in giving back. Your donations help us support communities, education, and sustainable development across Africa."}
+            </p>
+
+            {/* Show service count */}
+            <p className="text-gray-400 mt-4">
+              Showing {displayServices.length} {activeTab}{" "}
+              {displayServices.length === 1 ? "opportunity" : "opportunities"}
+              {services.length > 0 && " (Live data)"}
             </p>
           </div>
 
@@ -582,15 +635,15 @@ const ServicesPage: React.FC = () => {
                 <p className="text-gray-300 mb-4">{service.description}</p>
 
                 {/* Investment Details */}
-                {activeTab === "investment" && (
+                {activeTab === "investment" && service.minInvestment > 0 && (
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-400">Min Investment:</span>
-                      <span className="font-bold text-blue-400">{service.minInvestment}</span>
+                      <span className="font-bold text-blue-400">{formatCurrency(service.minInvestment)}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-400">Expected Return:</span>
-                      <span className="font-bold text-green-400">{service.expectedReturn}</span>
+                      <span className="font-bold text-green-400">{formatPercentage(service.expectedReturn)}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-400">Risk Level:</span>
@@ -671,6 +724,23 @@ const ServicesPage: React.FC = () => {
               </div>
             ))}
           </div>
+
+          {/* Empty State */}
+          {displayServices.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-gray-400 text-6xl mb-4">📋</div>
+              <h3 className="text-2xl font-bold text-white mb-4">No Services Available</h3>
+              <p className="text-gray-300 mb-6">
+                No {activeTab} services are currently available. Please check back later.
+              </p>
+              <button
+                onClick={fetchServices}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+              >
+                Refresh Services
+              </button>
+            </div>
+          )}
 
           {/* CTA */}
           <div className="text-center">
